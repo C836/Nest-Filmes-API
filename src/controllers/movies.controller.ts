@@ -6,6 +6,7 @@ import {
   Get,
   Post,
   Put,
+  Delete
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -52,5 +53,15 @@ export class MoviesController {
     await this.model.update(id, body);
 
     return await this.model.findOne({ where: { id } });
+  }
+
+  @Delete('/:id')
+  public async Delete(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ deleted: MovieModel }> {
+    const movie = await this.model.findOne({ where: { id } });
+
+    await this.model.delete(id);
+    return { deleted: movie };
   }
 }

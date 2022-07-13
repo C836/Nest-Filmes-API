@@ -6,7 +6,7 @@ import {
   Get,
   Post,
   Put,
-  Delete
+  Delete,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -20,48 +20,39 @@ export class MoviesController {
   ) {}
 
   @Get()
-  public async GetAll(): Promise<{ data: MovieModel[] }> {
-    const list = await this.model.find();
+  public async GetAll(): Promise< MovieModel[] > {
 
-    return { data: list };
+    return await this.model.find();;
   }
 
   @Get('/:id')
   public async Get(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<{ data: MovieModel }> {
-    const movie = await this.model.findOne({ where: { id } });
+    @Param('id', ParseIntPipe) id: number): Promise< MovieModel > {
 
-    return { data: movie };
+    return await this.model.findOne({ where: { id } });
   }
 
   @Post()
-  public async create(@Body() body: MovieSchema,
-  ): Promise< MovieModel > {
-    const created = await this.model.save(body);
-    
-    return  created ;
+  public async Post(
+    @Body() body: MovieSchema): Promise<MovieModel> {
+
+    return await this.model.save(body);
   }
 
   @Put('/:id')
   public async Put(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: MovieSchema,
-  ): Promise<MovieModel> {
-    const movie = await this.model.findOne({ where: { id } });
+    @Body() body: MovieSchema): Promise<MovieModel> {
 
     await this.model.update(id, body);
-
     return await this.model.findOne({ where: { id } });
   }
 
   @Delete('/:id')
   public async Delete(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<{ deleted: MovieModel }> {
-    const movie = await this.model.findOne({ where: { id } });
+    @Param('id', ParseIntPipe) id: number): Promise< string > {
 
     await this.model.delete(id);
-    return { deleted: movie };
+    return `Movie ID: "${id}" removed from database.`;
   }
 }

@@ -8,9 +8,11 @@ export class MoviesController {
   constructor(
     @InjectRepository(MovieModel) private model: Repository<MovieModel>,
   ) {}
-  
+
   @Get()
-  public GetAll():any {
-      return { data: "GET"}
+  public async GetAll(): Promise<{ data: MovieModel[] }> {
+    const list = await this.model.find();
+    
+    return { data: list };
   }
 }

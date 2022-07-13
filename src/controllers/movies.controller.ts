@@ -9,6 +9,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieModel } from 'src/models/movies.model';
+import { MovieSchema } from 'src/schemas/movies.schema'
 
 @Controller('/movies')
 export class MoviesController {
@@ -24,7 +25,8 @@ export class MoviesController {
   }
 
   @Get('/:id')
-  public async Get(@Param('id', ParseIntPipe) id: number,
+  public async Get(
+    @Param('id', ParseIntPipe) id: number,
   ): Promise<{ data: MovieModel }> {
     const movie = await this.model.findOne({ where: { id } });
 
@@ -32,7 +34,7 @@ export class MoviesController {
   }
 
   @Post()
-  public async create(@Body() body: any,
+  public async create(@Body() body: MovieSchema,
   ): Promise< MovieModel > {
     const created = await this.model.save(body);
     

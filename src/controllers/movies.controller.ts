@@ -4,12 +4,13 @@ import {
   Param,
   Body,
   Get,
-  Post
+  Post,
+  Put,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieModel } from 'src/models/movies.model';
-import { MovieSchema } from 'src/schemas/movies.schema'
+import { MovieSchema } from 'src/schemas/movies.schema';
 
 @Controller('/movies')
 export class MoviesController {
@@ -39,5 +40,17 @@ export class MoviesController {
     const created = await this.model.save(body);
     
     return  created ;
+  }
+
+  @Put('/:id')
+  public async Put(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: MovieSchema,
+  ): Promise<MovieModel> {
+    const movie = await this.model.findOne({ where: { id } });
+
+    await this.model.update(id, body);
+
+    return await this.model.findOne({ where: { id } });
   }
 }

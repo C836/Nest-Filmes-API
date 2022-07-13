@@ -1,4 +1,11 @@
-import { Controller, Get, ParseIntPipe, Param } from '@nestjs/common';
+import {
+  Controller,
+  ParseIntPipe,
+  Param,
+  Body,
+  Get,
+  Post
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieModel } from 'src/models/movies.model';
@@ -22,5 +29,13 @@ export class MoviesController {
     const movie = await this.model.findOne({ where: { id } });
 
     return { data: movie };
+  }
+
+  @Post()
+  public async create(@Body() body: any,
+  ): Promise< MovieModel > {
+    const created = await this.model.save(body);
+    
+    return  created ;
   }
 }

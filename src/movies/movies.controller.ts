@@ -9,7 +9,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { MovieModel } from './movies.model';
-import { MovieSchema } from './movies.schema';
+import { MovieSchema } from './schemas/movies.schema';
 import { MovieService } from './movies.service';
 
 @Controller('/movies')

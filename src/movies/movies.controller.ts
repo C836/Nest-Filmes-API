@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MovieModel } from 'src/models/movies.model';
-import { MovieSchema } from 'src/schemas/movies.schema';
+import { MovieModel } from './movies.model';
+import { MovieSchema } from './movies.schema';
 
 @Controller('/movies')
 export class MoviesController {

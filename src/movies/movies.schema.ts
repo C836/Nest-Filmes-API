@@ -26,7 +26,7 @@ export class MovieSchema {
   @ApiProperty({
     type: Number,
     description: 'Movie running time in minutes',
-    example: 104
+    example: 104,
   })
   length: number;
 
@@ -36,7 +36,8 @@ export class MovieSchema {
     type: String,
     maxLength: 1024,
     description: 'Movie synopsis',
-    example: 'Morbius is a 2022 American superhero film based on the Marvel Comics character of the same name[...]'
+    example:
+      'Morbius is a 2022 American superhero film based on the Marvel Comics character of the same name[...]',
   })
   description: string;
 
@@ -46,7 +47,7 @@ export class MovieSchema {
     type: String,
     maxLength: 255,
     description: 'Movie director name',
-    example: 'Daniel Espinosa'
+    example: 'Daniel Espinosa',
   })
   director: string;
 }

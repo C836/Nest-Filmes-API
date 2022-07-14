@@ -8,35 +8,32 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { MovieModel } from './movies.model';
 import { MovieSchema } from './movies.schema';
+import { MovieService } from './movies.service';
 
 @Controller('/movies')
 export class MoviesController {
-  constructor(
-    @InjectRepository(MovieModel) private model: Repository<MovieModel>,
-  ) {}
+  constructor(private readonly movieService: MovieService) {}
 
   @Get()
   public async GetAll(): Promise< MovieModel[] > {
 
-    return await this.model.find();;
+    return await this.movieService.GetAll();;
   }
 
   @Get('/:id')
   public async Get(
     @Param('id', ParseIntPipe) id: number): Promise< MovieModel > {
 
-    return await this.model.findOne({ where: { id } });
+    return await this.movieService.Get(id);
   }
 
   @Post()
   public async Post(
     @Body() body: MovieSchema): Promise<MovieModel> {
 
-    return await this.model.save(body);
+    return await this.movieService.Post(body);
   }
 
   @Put('/:id')
@@ -44,15 +41,14 @@ export class MoviesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() body: MovieSchema): Promise<MovieModel> {
 
-    await this.model.update(id, body);
-    return await this.model.findOne({ where: { id } });
+    await this.movieService.Put(id, body);
+    return await this.movieService.Get(id);
   }
 
   @Delete('/:id')
   public async Delete(
     @Param('id', ParseIntPipe) id: number): Promise< string > {
 
-    await this.model.delete(id);
-    return `Movie ID: "${id}" removed from database.`;
+    return await this.movieService.Delete(id);
   }
 }

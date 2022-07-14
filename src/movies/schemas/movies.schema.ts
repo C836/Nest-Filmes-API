@@ -1,7 +1,10 @@
 import { IsString, MaxLength, IsInt, Min, IsDateString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { MovieModel } from '../movies.model';
 
 export class MovieSchema {
+  id: number
+
   @IsString()
   @MaxLength(255)
   @ApiProperty({
@@ -50,4 +53,13 @@ export class MovieSchema {
     example: 'Daniel Espinosa',
   })
   director: string;
+
+  constructor(movie?: Partial<MovieModel>) {
+    this.id = movie?.id;
+    this.title = movie?.title;
+    this.release = movie?.release;
+    this.length = movie?.length;
+    this.description = movie?.description;
+    this.director = movie?.director;
+  }
 }

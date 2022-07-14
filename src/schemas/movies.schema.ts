@@ -11,7 +11,7 @@ export class MovieSchema {
 
     @IsInt()
     @Min(0)
-    duration: number;
+    length: number;
 
     @IsString()
     @MaxLength(1024)

@@ -12,7 +12,7 @@ export class MovieModel {
   release: string;
 
   @Column()
-  duration: number;
+  length: number;
 
   @Column()
   description: string;

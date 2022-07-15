@@ -4,6 +4,12 @@ import { Repository } from 'typeorm';
 import { MovieModel } from './movies.model';
 import { MovieService } from './movies.service';
 
+import {
+  mockMovieList,
+  mockMovieEntity,
+  mockMovieUpdatedEntity,
+} from './schemas/movie.mocks';
+
 describe('MovieService', () => {
   let movieService: MovieService;
   let movieRepository: Repository<MovieModel>;
@@ -14,7 +20,8 @@ describe('MovieService', () => {
         MovieService,
         {
           provide: getRepositoryToken(MovieModel),
-          useValue: {},
+          useValue: {             
+            find: jest.fn().mockResolvedValue(mockMovieList)},
         },
       ],
     }).compile();
@@ -28,5 +35,14 @@ describe('MovieService', () => {
   it('should be defined', () => {
     expect(movieService).toBeDefined();
     expect(movieRepository).toBeDefined();
+  });
+
+  describe('find', () => {
+    it('should return a movie list successfully', async () => {
+      const result = await movieService.GetAll();
+
+      expect(result).toEqual(mockMovieList);
+      expect(movieRepository.find).toHaveBeenCalledTimes(1);
+    });
   });
 });

@@ -1,73 +1,83 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Nest FilmesAPI
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Sistema de registro de filmes seguindo o padrão de interface API Restful. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<div>
+<img src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white"/>
+<img src="https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white"/>
+<img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
+<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>
+<img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"/>
+</div>
 
-## Description
+## 💻 Sobre
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta foi minha primeira aplicação utilizando o framework NestJS e o sistema testes por meio do Jest. Mesmo tendo experiência com aplicações em Node e Typescript, foi um grande desafio implementar todas as funcionalidades da forma correta. Escolhi utilizar o SQLite como banco de dados devido a simplicidade do projeto. Foram implementados todos os métodos CRUD e diversos testes integrados para verificar o funcionamento completo da API.
 
-## Installation
+O Projeto também conta com uma [documentação](https://filmes-apirest.herokuapp.com/api) com todas as rotas, modelos e exemplos das requisições. Para acessar, siga o passo a passo abaixo ou acesse a versão web por [aqui](https://filmes-apirest.herokuapp.com/movies)
+
+## 📥 Instalação
+
+1. Faça o download como ZIP clicando neste [link](https://github.com/C836/Nest-Filmes-API/archive/refs/heads/main.zip) e extraia a pasta no local de sua preferência ou siga o passo a passo para fazer a instalação através do terminal do [Git:](https://git-scm.com/)
+
+```bash
+# Navegue pelos arquivos com o comando "cd" e faça o download do projeto
+
+# Via SSH
+$ git clone https://github.com/C836/Nest-Filmes-API.git
+# ou via HTTPS
+$ git clone git@github.com:C836/Nest-Filmes-API.git
+
+# Após o download, entre na pasta raiz da aplicação
+$ cd filmes-api
+```
+
+2. Instale as dependências necessárias e inicie a aplicação.
 
 ```bash
 $ npm install
+
+$ npm start
 ```
 
-## Running the app
+## 🤖 Testes
+
+A aplicação conta com uma lista de testes unitários para verificar o funcionamento do projeto utilizando o framework [Jest](https://jestjs.io/pt-BR/).
+
+Para iniciar os testes utilize o seguinte comando em um terminal de sua escolha:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+<details>
+<summary>Specs</summary>
+</p>
+Testes de controle
+</p>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- [x] Definição do módulo de controle e módulo de serviço
+- [x] Resposta da rota GetAll
+- [x] Resposta da rota Get
+- [x] Resposta da rota Post
+- [x] Resposta da rota Put
+- [x] Resposta da rota Delete
 
-## Stay in touch
+Testes de serviço
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- [x] Definição do módulo de serviço e módulo das funções
+- [x] Resposta da função de pesquisa
+- [x] Resposta da função de pesquisa unitária
+- [x] Resposta da função de criação
+- [x] Resposta da função de atualização
+- [x] Resposta da função de salvamento
+- [x] Resposta da função de remoção
+</details>
 
-## License
+## 📝 Licença
 
-Nest is [MIT licensed](LICENSE).
+<b>Copyright (c) 2022 Gabriel Lopes</b>
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/C836/Greatdex/blob/main/LICENSE) para mais detalhes.

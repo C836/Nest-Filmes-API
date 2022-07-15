@@ -21,7 +21,8 @@ describe('MovieService', () => {
         {
           provide: getRepositoryToken(MovieModel),
           useValue: {             
-            find: jest.fn().mockResolvedValue(mockMovieList)},
+            find: jest.fn().mockResolvedValue(mockMovieList),
+            findOne: jest.fn().mockResolvedValue(mockMovieEntity)},
         },
       ],
     }).compile();
@@ -43,6 +44,15 @@ describe('MovieService', () => {
 
       expect(result).toEqual(mockMovieList);
       expect(movieRepository.find).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('findOne', () => {
+    it('should get a single movie item successfully', async () => {
+      const result = await movieService.Get(1);
+
+      expect(result).toEqual(mockMovieEntity);
+      expect(movieRepository.findOne).toHaveBeenCalledTimes(1);
     });
   });
 });

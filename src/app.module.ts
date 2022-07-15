@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MoviesController } from './movies/movies.controller';
+import { MoviesController } from './movies/controllers/movies.controller';
 import { MovieModel } from './movies/movies.model';
-import { MovieService } from './movies/movies.service';
+import { MovieService } from './movies/services/movies.service';
 
 @Module({
   controllers: [MoviesController],

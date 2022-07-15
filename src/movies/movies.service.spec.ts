@@ -25,6 +25,7 @@ describe('MovieService', () => {
             findOne: jest.fn().mockResolvedValue(mockMovieEntity),
             create: jest.fn().mockReturnValue(mockMovieEntity),
             save: jest.fn().mockResolvedValue(mockMovieEntity),
+            update: jest.fn().mockReturnValue(mockMovieUpdatedEntity),
           },
         },
       ],
@@ -65,6 +66,18 @@ describe('MovieService', () => {
 
       expect(result).toEqual(mockMovieEntity);
       expect(movieRepository.save).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('update', () => {
+    it('should update a movie item successfully', async () => {
+      jest
+        .spyOn(movieRepository, 'save')
+        .mockResolvedValueOnce(mockMovieUpdatedEntity);
+
+      const result = await movieService.Put(1, mockMovieUpdatedEntity);
+
+      expect(result).toEqual(mockMovieEntity);
     });
   });
 });

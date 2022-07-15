@@ -17,7 +17,8 @@ describe('TodoController', () => {
           useValue: {
             GetAll: jest.fn().mockResolvedValue(mockMovieList),
             Get: jest.fn().mockResolvedValue(mockMovieEntity),
-            Post: jest.fn().mockResolvedValue(mockMovieEntity)
+            Post: jest.fn().mockResolvedValue(mockMovieEntity),
+            Put: jest.fn().mockResolvedValue(mockMovieUpdatedEntity)
           },
         },
       ],
@@ -63,6 +64,19 @@ describe('TodoController', () => {
       expect(movieService.Post).toHaveBeenCalledWith(body);
     });
   });
-
   
+  describe('Put', () => {
+    it('should update a movie item successfully', async () => {
+      const body = mockMovieUpdatedEntity
+
+      const result = await movieController.Put(1, body);
+
+      console.log(mockMovieEntity)
+      console.log(result)
+
+      expect(result).toEqual(mockMovieUpdatedEntity);
+      expect(movieService.Put).toHaveBeenCalledTimes(1);
+      expect(movieService.Put).toHaveBeenCalledWith(1, body);
+    });
+  });
 });

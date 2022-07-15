@@ -41,8 +41,7 @@ export class MoviesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() body: MovieSchema): Promise<MovieModel> {
 
-    await this.movieService.Put(id, body);
-    return await this.movieService.Get(id);
+    return await this.movieService.Put(id, body);
   }
 
   @Delete('/:id')

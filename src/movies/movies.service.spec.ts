@@ -20,9 +20,12 @@ describe('MovieService', () => {
         MovieService,
         {
           provide: getRepositoryToken(MovieModel),
-          useValue: {             
+          useValue: {
             find: jest.fn().mockResolvedValue(mockMovieList),
-            findOne: jest.fn().mockResolvedValue(mockMovieEntity)},
+            findOne: jest.fn().mockResolvedValue(mockMovieEntity),
+            create: jest.fn().mockReturnValue(mockMovieEntity),
+            save: jest.fn().mockResolvedValue(mockMovieEntity),
+          },
         },
       ],
     }).compile();
@@ -53,6 +56,15 @@ describe('MovieService', () => {
 
       expect(result).toEqual(mockMovieEntity);
       expect(movieRepository.findOne).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('create', () => {
+    it('should create a new movie item successfully', async () => {
+      const result = await movieService.Post(mockMovieEntity);
+
+      expect(result).toEqual(mockMovieEntity);
+      expect(movieRepository.save).toHaveBeenCalledTimes(1);
     });
   });
 });

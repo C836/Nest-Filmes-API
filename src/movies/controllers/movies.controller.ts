@@ -84,7 +84,6 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ 
     summary: 'Deletes a movie entry' })
   @ApiResponse({ 

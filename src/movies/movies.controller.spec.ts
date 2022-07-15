@@ -18,7 +18,8 @@ describe('TodoController', () => {
             GetAll: jest.fn().mockResolvedValue(mockMovieList),
             Get: jest.fn().mockResolvedValue(mockMovieEntity),
             Post: jest.fn().mockResolvedValue(mockMovieEntity),
-            Put: jest.fn().mockResolvedValue(mockMovieUpdatedEntity)
+            Put: jest.fn().mockResolvedValue(mockMovieUpdatedEntity),
+            Delete: jest.fn().mockResolvedValue(`Movie ID: "1" removed from database.`)
           },
         },
       ],
@@ -77,6 +78,14 @@ describe('TodoController', () => {
       expect(result).toEqual(mockMovieUpdatedEntity);
       expect(movieService.Put).toHaveBeenCalledTimes(1);
       expect(movieService.Put).toHaveBeenCalledWith(1, body);
+    });
+  });
+
+  describe('Delete', () => {
+    it('should remove movie id 1', async () => {
+      const result = await movieController.Delete(1);
+
+      expect(result).toBe(`Movie ID: "${1}" removed from database.`);
     });
   });
 });

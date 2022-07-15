@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MovieModel } from './../movies.model';
@@ -16,20 +16,49 @@ export class MovieService {
   }
 
   public async Get(id: number): Promise<MovieModel> {
-    return await this.movieRepository.findOne({ where: { id } });
+    try{
+      return await this.movieRepository.findOne({ where: { id } })} 
+
+    catch(error) {
+      throw new NotFoundException
+    }
   }
 
   public async Post(body: MovieSchema): Promise<MovieModel> {
-    return await this.movieRepository.save(body);
+    try{
+      return await this.movieRepository.save(body)}
+
+    catch(error) {
+      throw new BadRequestException
+    }
   }
 
   public async Put(id: number, body: MovieSchema): Promise<MovieModel> {
-    await this.movieRepository.update(id, body);
-    return await this.movieRepository.findOne({ where: { id } });
+    try{
+      await this.movieRepository.update(id, body)
+
+      return await this.movieRepository.findOne({ where: { id } });
+    }
+    
+    catch(error) {
+      if(error.status === 400) {
+        throw new BadRequestException
+      } 
+      else if(error.status === 404) {
+        throw new NotFoundException
+      }
+    }
   }
 
   public async Delete(id: number): Promise<string> {
-    await this.movieRepository.delete(id);
-    return `Movie ID: "${id}" removed from database.`;
+    try {
+      await this.movieRepository.delete(id);
+
+      return `Movie ID: "${id}" removed from database.`;
+    }
+
+    catch(error) {
+      throw new NotFoundException
+    } 
   }
 }

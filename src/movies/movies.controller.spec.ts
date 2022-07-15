@@ -72,9 +72,6 @@ describe('TodoController', () => {
 
       const result = await movieController.Put(1, body);
 
-      console.log(mockMovieEntity)
-      console.log(result)
-
       expect(result).toEqual(mockMovieUpdatedEntity);
       expect(movieService.Put).toHaveBeenCalledTimes(1);
       expect(movieService.Put).toHaveBeenCalledWith(1, body);

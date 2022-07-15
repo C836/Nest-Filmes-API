@@ -15,7 +15,8 @@ describe('TodoController', () => {
         {
           provide: MovieService,
           useValue: {
-            GetAll: jest.fn().mockResolvedValue(mockMovieList)
+            GetAll: jest.fn().mockResolvedValue(mockMovieList),
+            Get: jest.fn().mockResolvedValue(mockMovieEntity)
           },
         },
       ],
@@ -37,6 +38,16 @@ describe('TodoController', () => {
       expect(result).toEqual(mockMovieList);
       expect(typeof result).toEqual('object');
       expect(movieService.GetAll).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('Get', () => {
+    it('should get a single movie item successfully', async () => {
+      const result = await movieController.Get(1);
+
+      expect(result).toEqual(mockMovieEntity);
+      expect(movieService.Get).toHaveBeenCalledTimes(1);
+      expect(movieService.Get).toHaveBeenCalledWith(1);
     });
   });
 });

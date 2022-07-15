@@ -1,14 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MovieModel } from './movies.model';
+import { MovieModel } from './../movies.model';
 import { MovieService } from './movies.service';
 
 import {
   mockMovieList,
   mockMovieEntity,
   mockMovieUpdatedEntity,
-} from './schemas/movie.mocks';
+} from './../schemas/movie.mocks';
 
 describe('MovieService', () => {
   let movieService: MovieService;

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MoviesController } from './movies.controller';
-import { MovieService } from './movies.service';
+import { MovieService } from '../../movies/services/movies.service';
 
-import { mockMovieList, mockMovieEntity, mockMovieUpdatedEntity } from './schemas/movie.mocks'
+import { mockMovieList, mockMovieEntity, mockMovieUpdatedEntity } from '../schemas/movie.mocks'
 
 describe('TodoController', () => {
   let movieController: MoviesController;

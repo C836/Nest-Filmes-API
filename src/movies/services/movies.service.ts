@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { MovieModel } from './movies.model';
-import { MovieSchema } from './schemas/movies.schema';
+import { MovieModel } from './../movies.model';
+import { MovieSchema } from './../schemas/movies.schema';
 
 @Injectable()
 export class MovieService {

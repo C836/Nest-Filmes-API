@@ -8,9 +8,9 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { MovieModel } from './movies.model';
-import { MovieSchema } from './schemas/movies.schema';
-import { MovieService } from './movies.service';
+import { MovieModel } from './../movies.model';
+import { MovieSchema } from './../schemas/movies.schema';
+import { MovieService } from './../services/movies.service';
 
 @Controller('/movies')
 export class MoviesController {

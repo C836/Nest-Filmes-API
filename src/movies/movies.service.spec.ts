@@ -26,6 +26,7 @@ describe('MovieService', () => {
             create: jest.fn().mockReturnValue(mockMovieEntity),
             save: jest.fn().mockResolvedValue(mockMovieEntity),
             update: jest.fn().mockReturnValue(mockMovieUpdatedEntity),
+            delete: jest.fn().mockReturnValue(`Movie ID: "1" removed from database.`)
           },
         },
       ],
@@ -80,4 +81,13 @@ describe('MovieService', () => {
       expect(result).toEqual(mockMovieEntity);
     });
   });
+
+  describe('delete', () => {
+    it('should delete a movie item successfully', async () => {
+      const result = await movieService.Delete(1);
+
+      expect(result).toBe(`Movie ID: "1" removed from database.`);
+      expect(movieRepository.delete).toHaveBeenCalledTimes(1);
+    });
+  })
 });

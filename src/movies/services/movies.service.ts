@@ -17,7 +17,7 @@ export class MovieService {
 
   public async Get(id: number): Promise<MovieModel> {
     try{
-      return await this.movieRepository.findOne({ where: { id } })} 
+      return await this.movieRepository.findOneOrFail({ where: { id } })} 
 
     catch(error) {
       throw new NotFoundException
@@ -25,33 +25,24 @@ export class MovieService {
   }
 
   public async Post(body: MovieSchema): Promise<MovieModel> {
-    try{
-      return await this.movieRepository.save(body)}
-
-    catch(error) {
-      throw new BadRequestException
-    }
+    return await this.movieRepository.save(body)
   }
 
   public async Put(id: number, body: MovieSchema): Promise<MovieModel> {
-    try{
-      await this.movieRepository.update(id, body)
+    await this.movieRepository.update(id, body)
 
-      return await this.movieRepository.findOne({ where: { id } });
+    try{
+      return await this.movieRepository.findOneOrFail({ where: { id } });
     }
     
     catch(error) {
-      if(error.status === 400) {
-        throw new BadRequestException
-      } 
-      else if(error.status === 404) {
-        throw new NotFoundException
-      }
+      throw new NotFoundException
     }
   }
 
   public async Delete(id: number): Promise<string> {
     try {
+      await this.movieRepository.findOneOrFail({ where: { id } });
       await this.movieRepository.delete(id);
 
       return `Movie ID: "${id}" removed from database.`;

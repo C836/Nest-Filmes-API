@@ -22,7 +22,7 @@ describe('MovieService', () => {
           provide: getRepositoryToken(MovieModel),
           useValue: {
             find: jest.fn().mockResolvedValue(mockMovieList),
-            findOne: jest.fn().mockResolvedValue(mockMovieEntity),
+            findOneOrFail: jest.fn().mockResolvedValue(mockMovieEntity),
             create: jest.fn().mockReturnValue(mockMovieEntity),
             save: jest.fn().mockResolvedValue(mockMovieEntity),
             update: jest.fn().mockReturnValue(mockMovieUpdatedEntity),
@@ -57,7 +57,7 @@ describe('MovieService', () => {
       const result = await movieService.Get(1);
 
       expect(result).toEqual(mockMovieEntity);
-      expect(movieRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(movieRepository.findOneOrFail).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -79,6 +79,8 @@ describe('MovieService', () => {
       const result = await movieService.Put(1, mockMovieUpdatedEntity);
 
       expect(result).toEqual(mockMovieEntity);
+      expect(movieRepository.update).toHaveBeenCalledTimes(1);
+      expect(movieRepository.findOneOrFail).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -87,6 +89,7 @@ describe('MovieService', () => {
       const result = await movieService.Delete(1);
 
       expect(result).toBe(`Movie ID: "1" removed from database.`);
+      expect(movieRepository.findOneOrFail).toHaveBeenCalledTimes(1);
       expect(movieRepository.delete).toHaveBeenCalledTimes(1);
     });
   })

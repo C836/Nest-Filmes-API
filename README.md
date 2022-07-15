@@ -31,7 +31,7 @@ $ git clone https://github.com/C836/Nest-Filmes-API.git
 $ git clone git@github.com:C836/Nest-Filmes-API.git
 
 # Após o download, entre na pasta raiz da aplicação
-$ cd filmes-api
+$ cd Nest-Filmes-API
 ```
 
 2. Instale as dependências necessárias e inicie a aplicação.
